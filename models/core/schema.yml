@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-    - name: staging
+    - name: core
       #For bigquery:
       database: thinking-prism-375117
 
