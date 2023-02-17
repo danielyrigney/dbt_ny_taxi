@@ -9,13 +9,14 @@ sources:
       # For postgres:
       # database: production
 
-      schema: de-zoomcamp
+      schema: dezoomcamp
 
       # loaded_at_field: record_loaded_at
       tables:
         - name: green_taxi
         - name: yellow_taxi
         - name: fhv_taxi
+        - name: taxi_zone_lookup
          # freshness:
            # error_after: {count: 6, period: hour}
 
