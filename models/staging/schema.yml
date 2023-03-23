@@ -9,13 +9,14 @@ sources:
       # For postgres:
       # database: production
 
-      schema: de-zoomcamp
+      schema: dezoomcamp
 
       # loaded_at_field: record_loaded_at
       tables:
         - name: green_taxi
         - name: yellow_taxi
         - name: fhv_taxi
+        - name: taxi_zone_lookup
          # freshness:
            # error_after: {count: 6, period: hour}
 
@@ -110,7 +111,6 @@ models:
             description: Total amount of all tolls paid in trip.
           - name: Total_amount 
             description: The total amount charged to passengers. Does not include cash tips.
-
     - name: stg_yellow_tripdata
       description: > 
         Trips made by New York City's iconic yellow taxis. 
@@ -202,3 +202,30 @@ models:
             description: Total amount of all tolls paid in trip.
           - name: Total_amount 
             description: The total amount charged to passengers. Does not include cash tips.
+    - name: stg_fhv_tripdata
+      description: > 
+        Trips made by New York City's fhv vehicales. 
+      columns:
+          - name: Pickup_locationid
+            description: locationid where the meter was engaged.
+            tests:
+             - relationships:
+                to: ref('taxi_zone_lookup')
+                field: locationid
+                severity: warn
+          - name: dropoff_locationid 
+            description: locationid where the meter was engaged.
+            tests:
+            - relationships:
+                to: ref('taxi_zone_lookup')
+                field: locationid
+                severity: warn
+          - name: pickup_datetime 
+            description: The date and time when the meter was engaged.
+          - name: dropoff_datetime 
+            description: The date and time when the meter was disengaged.
+
+
+
+
+
